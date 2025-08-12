@@ -34,22 +34,22 @@
 ip dhcp pool Admins
  network 192.168.10.0 255.255.255.0
  default-router 192.168.10.1
- dns-server 192.168.100.4
+ dns-server 192.168.100.2
 
 ip dhcp pool Employees
  network 192.168.20.0 255.255.255.0
  default-router 192.168.20.1
- dns-server 192.168.100.4
+ dns-server 192.168.100.2
 
 ip dhcp pool Guests
  network 192.168.30.0 255.255.255.0
  default-router 192.168.30.1
- dns-server 192.168.100.4
+ dns-server 192.168.100.2
 
 ip dhcp pool Servers
  network 192.168.100.0 255.255.255.0
  default-router 192.168.100.1
- dns-server 192.168.100.4
+ dns-server 192.168.100.2
 ```
 
 ---
@@ -65,19 +65,33 @@ access-list 100 permit ip any any
 interface g0/0.30
 ip access-group 100 in
 ```
+---
+
+## 🧠 DNS Server Setup
+
+- *IP:* 192.168.99.2
+- *Domain:* server.local
+- Enabled under Services > DNS > server.local → 192.168.100.2
+---
+
+## ✅ Testing
+
+Use the following to validate:
+
+- ping server.local from Admin or Staff PCs → should succeed
+- ping server.local from Guest PC → should fail (blocked by ACL)
+- Verify each PC receives IP via DHCP
 
 ---
 
-## 🖥 Server Roles
+## 📁 Files Included
 
-| Server Type | IP Address     | Function                         |
-|-------------|---------------|-----------------------------------|
-| DNS Server  | 192.168.100.4  | Resolves domain names            |
-| Web Server  | 192.168.100.10 | Hosts internal website (HTTP)    |
-| Mail Server | 192.168.100.x  | Handles email services (SMTP/IMAP)|
+- .pkt file (Packet Tracer project)
+- README.md (project documentation)
 
 ---
 
-## 🛠 Tools Used
-- Cisco Packet Tracer  
-- VLAN, DHCP, ACL, DNS, HTTP, Mail Configuration  
+## 🛠 Author
+
+- 👩‍💻 Created by: *نرجس حسن العمري*
+- 🎓 Diploma in Network Systems Administration — Expected Graduation: Jan 2025
